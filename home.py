@@ -1,7 +1,7 @@
 import streamlit as st
 
 # 제목
-st.title("Hello, Streamlit!")
+st.title("Hello, Streamlitaa!")
 
 # 텍스트
 st.write("This is a simple Streamlit app.")
