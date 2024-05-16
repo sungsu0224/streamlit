@@ -1,7 +1,8 @@
+import streamlit as st
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
-uri = "mongodb+srv://rlatjdtn1014:<pw>@cluster0.q7dnljt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+uri = st.secrets["mongodb_uri"]
 
 client = MongoClient(uri, server_api=ServerApi('1'))
 db = client.user
@@ -25,7 +26,3 @@ def getUsers():
 def setUsers(name, age):
     col = db.info
     col.insert_one({"name":name,"age":age})
-    
-
-
-# bdmzs2xozrgoTxv6
