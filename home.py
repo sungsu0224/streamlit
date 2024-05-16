@@ -11,7 +11,7 @@ st.write("💁🏻 학생 별 정보 페이지")
 # 사용자 입력
 user_input = st.text_input("Enter some text:")
 
-if st.button("readDatas"):
+if st.button("readDatass"):
     users = pymongo_users.connectTest()
 
 if st.button("readUserInfo"):
