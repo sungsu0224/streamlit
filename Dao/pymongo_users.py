@@ -23,6 +23,7 @@ def getUsers():
     data = col.find()
     return data
 
-def setUsers(name, age):
+def setUsers(name, phone,age,parentPhone):
     col = db.info
-    col.insert_one({"name":name,"age":age})
+    col.insert_one({"name":name,"phone": phone,"age":age,"parentPhone":parentPhone})
+
