@@ -11,15 +11,16 @@ with st.expander("신규 원생 등록") :
     phone = st.text_input("전화번호")
     age = st.number_input("나이")
     parentPhone = st.text_input("학부모 연락처")
+    link = "student?name="+name
     if st.button("등록하기"):
-        pymongo_users.setUsers(name, phone, age , parentPhone)
+        pymongo_users.setUsers(name, phone, age , parentPhone,link)
         
 st.divider()
 studentDf = pd.DataFrame(pymongo_users.getUsers())
 with st.expander("기존 원생 조회",expanded=True) :
     st.dataframe(studentDf,
                  column_config = {
-                     "name" : st.column_config.LinkColumn("your link name")
+                     "link" : st.column_config.LinkColumn("link",display_text="바로가기")
                  }
     )
 
