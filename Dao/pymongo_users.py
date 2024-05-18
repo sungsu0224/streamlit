@@ -20,7 +20,7 @@ def connectTest():
 
 def getUsers():
     col = db.info
-    data = col.find()
+    data = list(col.find())
     return data
 
 def setUsers(name, phone,age,parentPhone,link):

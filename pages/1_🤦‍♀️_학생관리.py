@@ -1,42 +1,42 @@
 import streamlit as st
 import pandas as pd
 from Dao import pymongo_users
+from annotated_text import annotated_text
+
 
 # 페이지 제목 및 설명
 st.title("학생관리 페이지")
-st.write("이 페이지를 사용하여 학생을 등록, 수정, 삭제 할 수 있습니다")
+st.write("선생님이 학생들의 정보 등록 /수정/삭제 할 수 있고, 각 학생에 대한 피드백을 작성할 수 있음")
 
-with st.expander("신규 원생 등록") :
+st.divider()
+with st.expander("신규 원생 등록"):
+    classes = st.number_input("수업", step=1)
     name = st.text_input("학생이름")
     phone = st.text_input("전화번호")
-    age = st.number_input("나이")
+    age = st.number_input("나이", step=1)
     parentPhone = st.text_input("학부모 연락처")
-    link = "student?name="+name
+    link = "student?name=" + name
     if st.button("등록하기"):
-        pymongo_users.setUsers(name, phone, age , parentPhone,link)
-        
+        pymongo_users.setUsers(classes, name, phone, age, parentPhone, link)
+
 st.divider()
+
+annotated_text("각 ", ("반별 학생의 정보", "", ""), "를 확인할 수 있습니다.")
+
+# MongoDB에서 데이터 읽기
 studentDf = pd.DataFrame(pymongo_users.getUsers())
-with st.expander("기존 원생 조회",expanded=True) :
-    st.dataframe(studentDf,
-                 column_config = {
-                     "link" : st.column_config.LinkColumn("link",display_text="바로가기")
-                 }
-    )
 
-# Sample data
-data = {
-    'Name': ['John Doe', 'Jane Smith', 'Alice Johnson', 'Bob Brown'],
-    'Phone Number': ['123-456-7890', '234-567-8901', '345-678-9012', '456-789-0123'],
-    'Age': [16, 17, 15, 16],
-    'Parent Contact': ['987-654-3210', '876-543-2109', '765-432-1098', '654-321-0987']
-}
+for index, row in studentDf.iterrows():
+    with st.expander(row['name']):
+        st.write(f"Age: {row['age']}")
+        st.write(f"parentPhone: {row['parentPhone']}")
+st.divider()
+
+annotated_text(("모든 학생들의 정보", "", ""), "를 확인할 수 있습니다")
 
 
-# Option to view details of a specific student
-student_name = st.selectbox('Select a student', studentDf['name'])
+student_name = st.selectbox('학생을 선택하세요', studentDf['name'])
 
-if student_name:
-    student_details = studentDf[studentDf['name'] == student_name]
-    st.write(f"### Details of {student_name}")
-    st.write(student_details)
+student_details = studentDf[studentDf['name'] == student_name]
+st.write(f"### Details of {student_name}")
+st.write(student_details)
