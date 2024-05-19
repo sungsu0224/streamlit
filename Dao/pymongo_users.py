@@ -23,7 +23,7 @@ def getUsers():
     data = list(col.find())
     return data
 
-def setUsers(name, phone,age,parentPhone,link):
+def setUsers(academy,classes,name, phone,age,parentPhone,link):
     col = db.info
-    col.insert_one({"name":name,"phone": phone,"age":age,"parentPhone":parentPhone,"link":link})
+    col.insert_one({"academy":academy,"classes":classes,"name":name,"phone": phone,"age":age,"parentPhone":parentPhone,"link":link})
 
