@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from datetime import datetime
 from Dao import pymongo_users
 from annotated_text import annotated_text
 
@@ -51,7 +52,7 @@ col = st.columns([1,1])
 
 
 for num in studentDf['classes'].unique() :
-    with col[(num-1)%2].container(border=True):
+    with st.container(border=True):
         filtered_df = studentDf[(studentDf['academy'] == num) & (studentDf['classes'] == num)]
         st.write(str(num)+"반 학생들의 정보입니다.")
         for index, row in filtered_df.iterrows():
@@ -60,7 +61,10 @@ for num in studentDf['classes'].unique() :
                 st.write(f"parentPhone: {row['parentPhone']}")
                 if st.button("수정하기",use_container_width=True,key="수정하기"+str(row['_id'])):
                     studentInfoChg(row['_id'])
-                st.button("피드백",type="primary",use_container_width=True,key="피드백"+str(row['_id']))
+                if st.button("피드백 작성",type="primary",use_container_width=True,key="피드백"+str(row['_id'])):
+                    st.text_input(label = "피드백 작성",key="피드백작성"+str(row['_id']))
+                    st.text("작성일 " + datetime.now().strftime('%Y 년 %m월 %d일'))
+                    st.button("피드백 제출하기",key="제출"+str(row['_id']))
 
                 
         

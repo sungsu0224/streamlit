@@ -1,4 +1,5 @@
 streamlit
 pymongo
 streamlit-aggrid
+datetime
 st-annotated-text
