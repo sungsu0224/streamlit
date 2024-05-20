@@ -27,3 +27,6 @@ def setUsers(academy,classes,name, phone,age,parentPhone,link):
     col = db.info
     col.insert_one({"academy":academy,"classes":classes,"name":name,"phone": phone,"age":age,"parentPhone":parentPhone,"link":link})
 
+def updateUsers(id,classes, name,phone,age,parentPhone):
+    col = db.info
+    col.update_one({"_id": id},{"$set":{"classes" : classes,"name": name,"phone" : phone , "age" : age, "parentPhone": parentPhone}})
