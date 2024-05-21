@@ -18,4 +18,5 @@ df = pd.DataFrame(data)
 
 # Streamlit 앱으로 DataFrame 표시
 st.title('AgGrid Example')
-AgGrid(df)
+
+

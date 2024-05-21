@@ -30,3 +30,18 @@ def setUsers(academy,classes,name, phone,age,parentPhone,link):
 def updateUsers(id,classes, name,phone,age,parentPhone):
     col = db.info
     col.update_one({"_id": id},{"$set":{"classes" : classes,"name": name,"phone" : phone , "age" : age, "parentPhone": parentPhone}})
+
+def setFeedback(id,content, timestamp):
+    col = db.feedback
+    print(id,content,timestamp)
+    col.insert_one({"student_id" : id, "content" : content, "timestamp" : timestamp})
+
+def getFeedback(id):
+    col = db.feedback
+    data = list(col.find())
+    return data
+
+def getAllFeedback():
+    col = db.feedback
+    data = list(col.find())
+    return data

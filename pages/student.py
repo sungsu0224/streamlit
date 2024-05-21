@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from annotated_text import annotated_text
-
+from Dao import pymongo_users
 
 params = st.query_params
 name = ""
@@ -9,6 +9,9 @@ name = ""
 
 if len(params) == 0 :
     st.error("잘못된 접근입니다.")
+    all_feedback = pd.DataFrame(pymongo_users.getAllFeedback())
+    st.dataframe(all_feedback)
+
 else :
     name = params["name"]
 
