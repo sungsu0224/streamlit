@@ -3,3 +3,4 @@ pymongo
 streamlit-aggrid
 datetime
 st-annotated-text
+streamlit-option-menu
