@@ -42,7 +42,7 @@ def studentInfoChg(id):
 
 # 페이지 제목 및 설명
 st.title("For _선생님_")
-
+annotated_text("학생 ", ("등록을 위한", "", ""), "과정들")
 st.divider()
 
 with st.expander("등록 상담"):
@@ -58,33 +58,44 @@ with st.expander("등록 상담"):
 
 with st.expander("학원 설명"):
     st.write("## Reading")
-    st.write("예습 (모르는 단어 찾기 + 해석해보기)")
-    st.write("직접 읽고 해석해보기")
-    st.write("해석 첨삭")
-    st.write("주제 잡기")
+    st.write("1. 예습 (모르는 단어 찾기 + 해석해보기)")
+    st.write("2. 직접 읽고 해석해보기")
+    st.write("3. 해석 첨삭")
+    st.write("4. 주제 잡기")
 
     st.write("homework")
-    st.write("그날 배운것 공책에 해석하기/ 고재 문제 풀기")
-    st.write("다음주 리딩 예습하기")
+    st.write("1. 그날 배운것 공책에 해석하기/ 고재 문제 풀기")
+    st.write("2. 다음주 리딩 예습하기")
 
+    st.divider()
     st.write("## Grammer")
-    st.write("문법의 큰 틀을 잡는 수업")
-    st.write("전에 배운 내용들 복습")
-    st.write("질문이 많은 수업")
+    st.write("1. 문법의 큰 틀을 잡는 수업")
+    st.write("2. 전에 배운 내용들 복습")
+    st.write("3. 질문이 많은 수업")
 
     st.write("homework")
-    st.write("본책+ WorkBook 문제 풀기")
-    st.write("### Listening")
+    st.write("1. 본책+ WorkBook 문제 풀기")
+    st.divider()
 
+    st.write("## Listening")
     st.write("수업x")
-    st.write("문제풀기")
-    st.write("낭독하기")
+    st.write("1. 문제풀기")
+    st.write("2. 낭독하기")
 
+    st.divider()
     st.write("## Voca")
     st.write("60-120개 (반마다다름)")
+
+    st.write("1. 그 외")
+    st.write("2. 매주 배운 내용 Weekly Test (미통과시 일요일 보충!)")
+    st.write("3. 그 주 숙제 완료 못할시 주말 보충")
+    st.write("4. 매달 Monthly Test를 통한 총 복습")
+    st.write("5. 한달에 주 8회 수업, 교재비 별도 (달 1회 보충 가능)")
+    st.write("")
     
+st.divider()
 with st.expander("반 배정"):
-    st.write("test")
+    st.write("이곳에선 미배정된 아이들의 반을 배정할 수 있습니다.")
 
 st.divider()
 annotated_text("각 반별 학생들의 ", ("정보 조회/수정 및 피드백 작성", "", ""), "을 할 수 있습니다.")
