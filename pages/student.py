@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 from annotated_text import annotated_text
 from Dao import pymongo_users
+import pandas as pd
+from bson.objectid import ObjectId
+from datetime import datetime
 
 params = st.query_params
 name = ""
@@ -15,25 +18,28 @@ if len(params) == 0 :
 else :
     name = params["name"]
 
-st.title("["+name+" 학생] 피드백")
+name = ObjectId (name)
+users = pd.DataFrame(pymongo_users.getUserById(name))
+allFeedback = pd.DataFrame(pymongo_users.getFeedback(name))
+
+student_name = users['name'][0]
+
+
+st.title("["+student_name+"] 학생 피드백")
 
 st.write("이 페이지에서 학부모님들이 학생들의 피드백 결과를 볼 수 있습니다.")
 
-# 각달의 피드백 내용을 보여주고싶음.
-# 우선 DB가 없음.. db에 학생별 피드백 내용이 저장되어야함.. 이는 관리자 페이지에서 만들고 여기선 보여지기만 할꺼임
-# 매달에 대한 반복문이 진행될 예정.
 
-with st.expander("2024년 05월",expanded=True) :
-    st.write("이름 :"+ name)
-    st.write("성적표")
-    st.write("피드백 내용")
-
-with st.expander("2024년 04월") :
-    st.write("이름 :"+ name)
-    st.write("성적표")
-    st.write("피드백 내용")
+flag = 1
+for feedback in allFeedback.iterrows():
+    time = feedback[1][3]
+    time = datetime.strptime(feedback[1][3],'%Y-%m-%d %H:%M:%S.%f').strftime('%Y년 %m월 %d일')
+    content = feedback[1][2]
     
-with st.expander("2024년 03월") :
-    st.write("이름 :"+ name)
-    st.write("성적표")
-    st.write("피드백 내용")
+    with st.expander(time+" 작성 피드백",expanded=flag):
+         st.write(content)
+    flag = 0
+
+if st.button("aa"):
+    st.switch_page("home.py")
+# st.link_button("home","/")

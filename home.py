@@ -71,7 +71,10 @@ for num in studentDf.sort_values(by="classes")['classes'].unique():
                 st.write(f"classes: {row['classes']}")
                 if st.button("수정하기",use_container_width=True,key="수정하기"+str(row['_id'])):
                     studentInfoChg(row['_id'])
-                if st.container(border=True):
+                st.link_button("피드백 바로가기","student/?name="+str(row['_id']))
+                         
+
+                with st.container(border=True):
                     content = st.text_input(label = "피드백 작성",key="피드백작성"+str(row['_id']))
                     timestamp = st.text("작성일 " + datetime.now().strftime('%Y 년 %m월 %d일'))
                     st.write(content)
